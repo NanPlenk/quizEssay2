@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soal Essay Teks LHO</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(
+          to right,
+          #c00000 0%,
+          #c00000 32%,
+          #ff0000 100%
+        );
+        background-blend-mode: multiply;
+        font-family: Arial, sans-serif;
+        min-height: 100vh;
+      }
+
+      h1 {
+        text-align: center;
+        color: #323232;
+        margin-bottom: 20px;
+      }
+
+      h2 {
+        text-align: center;
+        color: #323232;
+        margin-bottom: 20px;
+        font-style: italic;
+      }
+
+      h3 {
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      h3::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #c00000; /* Warna garis bawah */
+      }
+
+      form {
+        margin-top: 2%;
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        width: 70%;
+        max-width: 600px;
+        box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+        margin-bottom: 2%;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        margin-left: 4%;
+      }
+
+      input {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        margin-left: 4%;
+        outline: none;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+
+      input:focus {
+        border-color: #ff0000;
+        box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+      }
+
+      textarea {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        margin-left: 4%;
+        outline: none;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+
+      textarea:focus {
+        border-color: #ff0000;
+        box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+      }
+
+      img {
+        width: 90%;
+        margin-left: 4%;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #c00000;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      button:hover {
+        background-color: white;
+        color: #a00000;
+        transform: scale(1.05);
+        border: 2px solid #a00000;
+      }
+
+      .form-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .error {
+        color: red;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <form
+        id="essayForm"
+        action="https://script.google.com/macros/s/AKfycbwlUbaFXOL05x62jxJBhprmrEQMYkbeuKncSuE7LQCS85IHq63BsV4qQkowLCK-pyubPw/exec"
+        method="post"
+      >
+        <h1>Soal Essay</h1>
+        <h2>"Teks Anekdot"</h2>
+        <h3>Isi data diri di bawah ini:</h3>
+        <div>
+          <label for="Nama">Nama Lengkap</label>
+          <input id="Nama" name="Nama" placeholder="Masukkan Nama" />
+        </div>
+        <div>
+          <br /><label for="Absen">Nomor Absen</label>
+          <input
+            id="Absen"
+            name="Absen"
+            type="number"
+            placeholder="Masukkan Nomor Absen"
+            min="1"
+            step="1"
+            required
+          />
+          <span id="error-message" class="error"></span>
+        </div>
+        <div>
+          <br /><label for="Kelas">Kelas</label>
+          <input id="Kelas" name="Kelas" placeholder="Masukkan Kelas" />
+        </div>
+        <h3>Jawablah soal di bawah ini:</h3>
+        <div>
+          <img src="Lho.png" alt="Ilustrasi Anekdot" />
+          <br /><label
+            >Cermati gambar di bawah ini, dan buatlah teks laporan hasil
+            observasi</label
+          >
+        </div>
+        <div>
+          <br /><label for="Jawaban">Jawaban</label>
+          <textarea
+            id="Jawaban"
+            name="Jawaban"
+            placeholder="Masukkan Jawaban"
+          ></textarea>
+        </div>
+        <br />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <script>
+      document
+        .getElementById("essayForm")
+        .addEventListener("submit", function (event) {
+          const absenInput = document.getElementById("Absen");
+          const errorMessage = document.getElementById("error-message");
+          const absenValue = absenInput.value;
+
+          // Clear previous error message
+          errorMessage.textContent = "";
+
+          // Check if value is empty
+          if (!absenValue) {
+            errorMessage.textContent = "Nomor Absen tidak boleh kosong.";
+            event.preventDefault();
+            return;
+          }
+
+          // Check if value is a valid number
+          if (isNaN(absenValue) || absenValue <= 0) {
+            errorMessage.textContent =
+              "Nomor Absen harus berupa angka positif.";
+            event.preventDefault();
+            return;
+          }
+          event.preventDefault();
+
+          const form = event.target;
+          const formData = new FormData(form);
+
+          fetch(form.action, {
+            method: "POST",
+            body: formData,
+            mode: "cors", // Ubah dari "no-cors" menjadi "cors"
+          })
+            .then(() => {
+              alert("Jawaban berhasil dikirim!");
+            })
+            .catch((error) => {
+              alert("Terjadi kesalahan saat mengirim jawaban.");
+              console.error("Error:", error);
+            });
+        });
+    </script>
+  </body>
+</html>
